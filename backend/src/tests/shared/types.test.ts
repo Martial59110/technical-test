@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Compute, Task, Operands, OperationType } from '../../src/shared/types';
+import type { Compute, OperationType } from '../../shared/types';
 
 describe('TypeScript Types', () => {
   it('should allow valid Compute objects', () => {

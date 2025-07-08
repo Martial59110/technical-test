@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidOperation, validateCompute } from '../../src/utils/validation';
+import { isValidOperation, validateCompute } from '../../utils/validation';
 
 describe('isValidOperation', () => {
   it('should return true for valid operations', () => {
