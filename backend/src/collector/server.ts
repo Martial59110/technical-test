@@ -1,10 +1,11 @@
-import express from 'express'
-import { Request, Response } from 'express'
 import dotenv from 'dotenv'
-import logger from '../shared/logger'
 
 
 dotenv.config()
+
+import express from 'express'
+import { Request, Response } from 'express'
+import logger from '../shared/logger'
 
 const app = express()
 const port = process.env.COLLECTOR_PORT
