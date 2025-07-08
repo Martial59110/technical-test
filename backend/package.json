@@ -4,6 +4,9 @@
   "description": "L'objectif de ce test est d'évaluer vos compétences en développement backend, en particulier dans la création de deux serveurs utilisant Express.js et Redis pour le traitement de calculs reçus via des requêtes POST.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
