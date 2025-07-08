@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+import logger from './logger';
 
 // Client Redis partagé entre collecteur et processeur
 const redisClient = createClient({
@@ -7,12 +8,12 @@ const redisClient = createClient({
 
 //Log des erreurs Redis
 redisClient.on('error', (err) => {
-  console.error('Redis Client Error:', err);
+  logger.error('Redis Client Error:', err);
 });
 
 // Log de connexion réussie
 redisClient.on('connect', () => {
-  console.log('Connected to Redis');
+  logger.info('Connected to Redis');
 });
 
 export default redisClient; 
