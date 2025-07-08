@@ -1,0 +1,11 @@
+name: CI
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  backend-ci:
+
+  frontend-ci:
