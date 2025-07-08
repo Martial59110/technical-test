@@ -15,6 +15,9 @@ export default defineConfig([
     
       "no-unused-vars": "warn",
       "no-explicit-any": "error",
+      "no-console": "error",
+      "no-var": "error",
+      "no-magic-numbers": "warn",
     },
   },
   { ignores: ["**/*.js", "**/*.cjs", "**/*.mjs"] },
