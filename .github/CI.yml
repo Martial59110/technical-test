@@ -24,4 +24,7 @@ jobs:
       - name: Run ESLint
         run: cd backend && npx eslint .
 
+      - name: Run unit tests
+        run: cd backend && npx vitest run
+
   frontend-ci:
