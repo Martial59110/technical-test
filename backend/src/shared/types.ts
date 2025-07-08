@@ -9,4 +9,8 @@ export interface Task {
   compute: Compute;
   result: number | string;
   status: "success" | "failed" | "pending";
+}
+
+export interface Operands {
+  [key: string]: (operand1: number, operand2: number) => number;
 } 
