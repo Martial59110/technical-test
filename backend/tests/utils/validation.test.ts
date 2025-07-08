@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidOperation } from '../../src/utils/validation';
+import { isValidOperation, validateCompute } from '../../src/utils/validation';
 
 describe('isValidOperation', () => {
   it('should return true for valid operations', () => {
@@ -13,5 +13,27 @@ describe('isValidOperation', () => {
     expect(isValidOperation('invalid')).toBe(false);
     expect(isValidOperation('hack')).toBe(false);
     expect(isValidOperation('')).toBe(false);
+  });
+});
+
+describe('validateCompute', () => {
+  it('should return true for valid compute objects', () => {
+    expect(validateCompute({
+      operation: 'add',
+      operands: [5, 3]
+    })).toBe(true);
+  });
+
+  it('should return false for invalid compute objects', () => {
+    expect(validateCompute(null)).toBe(false);
+    expect(validateCompute(undefined)).toBe(false);
+    expect(validateCompute('not an object')).toBe(false);
+    expect(validateCompute({ operation: 'add' })).toBe(false);
+    expect(validateCompute({ operands: [5, 3] })).toBe(false);
+    expect(validateCompute({ operation: 'add', operands: [5] })).toBe(false);
+    expect(validateCompute({ operation: 'add', operands: [5, '3'] })).toBe(false);
+    expect(validateCompute({ operation: 'substract', operands: [5, 3] })).toBe(false);
+    expect(validateCompute({ operation: 'multiply', operands: [5, 3] })).toBe(false);
+    expect(validateCompute({ operation: 'divide', operands: [5, 3] })).toBe(false);
   });
 });
