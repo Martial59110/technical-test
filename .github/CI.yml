@@ -8,6 +8,9 @@ on:
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
       - uses: actions/checkout@v4
 
@@ -19,12 +22,12 @@ jobs:
           cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
-        run: cd backend && npm ci
+        run: npm ci
 
       - name: Run ESLint
-        run: cd backend && npx eslint .
+        run: npx eslint .
 
       - name: Run unit tests
-        run: cd backend && npx vitest run
+        run: npx vitest run
 
   frontend-ci:
