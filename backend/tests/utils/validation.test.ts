@@ -42,4 +42,11 @@ describe('validateCompute', () => {
     expect(validateCompute({ operation: 'multiply', operands: [undefined, 3] })).toBe(false);
     expect(validateCompute({ operation: 'divide', operands: [5, {}] })).toBe(false);
   });
+
+  it('should return true for all valid operations with different operands', () => {
+    expect(validateCompute({ operation: 'add', operands: [10, 5] })).toBe(true);
+    expect(validateCompute({ operation: 'substract', operands: [10, 5] })).toBe(true);
+    expect(validateCompute({ operation: 'multiply', operands: [10, 5] })).toBe(true);
+    expect(validateCompute({ operation: 'divide', operands: [10, 5] })).toBe(true);
+  });
 });
