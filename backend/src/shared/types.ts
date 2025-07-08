@@ -13,4 +13,6 @@ export interface Task {
 
 export interface Operands {
   [key: string]: (operand1: number, operand2: number) => number;
-} 
+}
+
+export type OperationType = "add" | "substract" | "multiply" | "divide"; 
