@@ -34,3 +34,9 @@ jobs:
         run: npx vitest run
 
   frontend-ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
+    steps:
+      - uses: actions/checkout@v4
