@@ -34,6 +34,12 @@ describe('validateCompute', () => {
     expect(validateCompute({ operation: 'add', operands: [5, '3'] })).toBe(false);
     expect(validateCompute({ operation: 'substract', operands: [5, '3'] })).toBe(false);
     expect(validateCompute({ operation: 'multiply', operands: [5, '2'] })).toBe(false);
-   
+  });
+
+  it('should return false for objects with wrong operand types', () => {
+    expect(validateCompute({ operation: 'add', operands: ['5', 3] })).toBe(false);
+    expect(validateCompute({ operation: 'substract', operands: [5, null] })).toBe(false);
+    expect(validateCompute({ operation: 'multiply', operands: [undefined, 3] })).toBe(false);
+    expect(validateCompute({ operation: 'divide', operands: [5, {}] })).toBe(false);
   });
 });
