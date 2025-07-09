@@ -13,10 +13,10 @@ export interface Task {
   status: "success" | "failed" | "pending";
 }
 
-// Collection des fonctions de calcul (add, substract, etc.)
+// Collection des fonctions de calcul (addition, subtract, etc.)
 export interface Operands {
   [key: string]: (operand1: number, operand2: number) => number;
 }
 
 // Les 4 calculs qu'on peut faire
-export type OperationType = "add" | "substract" | "multiply" | "divide"; 
+export type OperationType = "addition" | "subtract" | "multiply" | "divide"; 
