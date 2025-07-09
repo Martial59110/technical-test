@@ -1,9 +1,9 @@
 import { Compute, OperationType } from '../shared/types';
 
-// Vérifie si l'opération demandée est une des 4 autorisées donc add, substract, multiply, divide.
+// Vérifie si l'opération demandée est une des 4 autorisées donc addition, subtract, multiply, divide.
 
 export function isValidOperation(operation: string): operation is OperationType {
-  const validOperations: OperationType[] = ['add', 'substract', 'multiply', 'divide'];
+  const validOperations: OperationType[] = ['addition', 'subtract', 'multiply', 'divide'];
   return validOperations.includes(operation as OperationType);
 }
 
