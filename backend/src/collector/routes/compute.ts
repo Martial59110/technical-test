@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { validateCompute } from '../../utils/validation'
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../../shared/types';
-import { enqueueTask } from '../services/queue';
+import { enqueueTask, getAllTasks } from '../services/queue';
 import logger from '../../shared/logger';
 
 export const compute = async (req: Request, res: Response): Promise<void> => {
@@ -31,6 +31,19 @@ export const compute = async (req: Request, res: Response): Promise<void> => {
         logger.error({ 
             message: 'Failed to enqueue task',
             taskId: id,
+            error: error instanceof Error ? error.message : String(error)
+        });
+        res.status(500).json({ status: "error", message: "Internal server error" });
+    }
+}
+
+export const getTasks = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const tasks = await getAllTasks();
+        res.json({ status: "ok", tasks });
+    } catch (error) {
+        logger.error({ 
+            message: 'Failed to retrieve tasks',
             error: error instanceof Error ? error.message : String(error)
         });
         res.status(500).json({ status: "error", message: "Internal server error" });
