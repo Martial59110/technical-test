@@ -1,8 +1,19 @@
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { enqueueTask } from '../../collector/services/queue';
 import redisClient from '../../shared/redis';
 import { Task } from '../../shared/types';
 
+beforeAll(async () => {
+    if (!redisClient.isOpen) {
+      await redisClient.connect();
+    }
+  });
+  
+  afterAll(async () => {
+    if (redisClient.isOpen) {
+      await redisClient.quit();
+    }
+  });
 describe('enqueueTask', () => {
   it('should store the task in Redis', async () => {
     const task: Task = {
