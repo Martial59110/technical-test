@@ -16,6 +16,6 @@ export const compute = async (req: Request, res: Response): Promise<void> => {
         result: "",
         status: "pending"
     };
-    enqueueTask(task); 
+    await enqueueTask(task); 
     res.json({status: "ok"});
 }
