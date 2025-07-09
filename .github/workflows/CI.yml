@@ -8,6 +8,16 @@ on:
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     defaults:
       run:
         working-directory: ./backend
@@ -31,7 +41,7 @@ jobs:
         run: npx eslint .
 
       - name: Run unit tests
-        run: npx vitest run 
+        run: npx vitest run
 
   frontend-ci:
     runs-on: ubuntu-latest

@@ -17,7 +17,8 @@ services:
       - "5540:5540"
     volumes:
       - redis-insight:/data
- collector:
+
+  collector:
     build:
       context: ./backend
       dockerfile: Dockerfile-collector
@@ -30,5 +31,5 @@ services:
       - database
 
 volumes:
-    redis-data:
-    redis-insight:
+  redis-data:
+  redis-insight:
