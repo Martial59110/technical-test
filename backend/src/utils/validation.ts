@@ -1,9 +1,9 @@
 import { Compute, OperationType } from '../shared/types';
 
-// Vérifie si l'opération demandée est une des 4 autorisées donc add, substract, multiply, divide.
+// Vérifie si l'opération demandée est une des 4 autorisées donc addition, subtract, multiply, divide.
 
 export function isValidOperation(operation: string): operation is OperationType {
-  const validOperations: OperationType[] = ['add', 'substract', 'multiply', 'divide'];
+  const validOperations: OperationType[] = ['addition', 'subtract', 'multiply', 'divide'];
   return validOperations.includes(operation as OperationType);
 }
 
@@ -20,6 +20,7 @@ export function validateCompute(compute: unknown): compute is Compute {
     'operation' in obj &&
     'operands' in obj &&
     typeof obj.operation === 'string' &&
+    isValidOperation(obj.operation) &&
     Array.isArray(obj.operands) &&
     obj.operands.length === 2 &&
     obj.operands.every((op: unknown) => typeof op === 'number')

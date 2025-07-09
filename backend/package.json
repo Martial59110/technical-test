@@ -15,10 +15,12 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/uuid": "^10.0.0",
     "dotenv": "^17.1.0",
     "express": "^5.1.0",
     "pino": "^9.7.0",
-    "redis": "^5.5.6"
+    "redis": "^5.5.6",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
