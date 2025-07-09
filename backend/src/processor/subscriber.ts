@@ -8,6 +8,7 @@ export async function startSubscriber() {
       await redisClient.connect();
     }
   } catch (err) {
+    logger.error({ err }, 'Failed to connect to Redis in processor');
     throw err;
   } 
 }
