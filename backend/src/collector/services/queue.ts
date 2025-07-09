@@ -14,3 +14,25 @@ export async function enqueueTask(task: Task): Promise<void> {
         throw error; 
     }
 }
+
+export async function getAllTasks(): Promise<Task[]> {
+    try {
+        const keys = await redisClient.keys('*');
+        const tasks: Task[] = [];
+        
+        for (const key of keys) {
+            const taskData = await redisClient.get(key);
+            if (taskData) {
+                tasks.push(JSON.parse(taskData));
+            }
+        }
+        
+        return tasks;
+    } catch (error) {
+        logger.error({ 
+            message: 'Failed to retrieve tasks from Redis',
+            error: error instanceof Error ? error.message : String(error)
+        });
+        throw error;
+    }
+}
