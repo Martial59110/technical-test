@@ -20,6 +20,7 @@ export function validateCompute(compute: unknown): compute is Compute {
     'operation' in obj &&
     'operands' in obj &&
     typeof obj.operation === 'string' &&
+    isValidOperation(obj.operation) &&
     Array.isArray(obj.operands) &&
     obj.operands.length === 2 &&
     obj.operands.every((op: unknown) => typeof op === 'number')
