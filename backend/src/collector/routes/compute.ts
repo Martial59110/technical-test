@@ -12,7 +12,7 @@ export const compute = async (req: Request, res: Response): Promise<void> => {
             body: req.body,
             ip: req.ip
         });
-        res.status(400).json({ status: "error", message: "Invalid compute payload. 'operation' doit être une string parmi [add, substract, multiply, divide] et 'operands' doit être un tableau de deux nombres." });
+        res.status(400).json({ status: "error", message: "Invalid compute payload. 'operation' doit être une string parmi [addition, subtract, multiply, divide] et 'operands' doit être un tableau de deux nombres." });
         return;
     }
 
