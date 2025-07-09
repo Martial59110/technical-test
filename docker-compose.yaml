@@ -17,7 +17,17 @@ services:
       - "5540:5540"
     volumes:
       - redis-insight:/data
-
+ collector:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-collector
+    environment:
+      - REDIS_URL=redis://database:6379
+      - COLLECTOR_PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
 
 volumes:
     redis-data:
