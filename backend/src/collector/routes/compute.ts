@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { validateCompute } from '../../utils/validation'
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../../shared/types';
-import redisClient from '../../shared/redis';
+import { enqueueTask } from '../services/queue';
 
 export const compute = async (req: Request, res: Response): Promise<void> => {
     if (!validateCompute(req.body)) {
@@ -16,6 +16,6 @@ export const compute = async (req: Request, res: Response): Promise<void> => {
         result: "",
         status: "pending"
     };
-    await redisClient.set(id, JSON.stringify(task));
+    enqueueTask(task); 
     res.json({status: "ok"});
 }
