@@ -1,4 +1,6 @@
 import dotenv from 'dotenv'
+import cors from 'cors';
+
 
 
 dotenv.config()
@@ -12,6 +14,9 @@ const app = express()
 const port = process.env.COLLECTOR_PORT
 
 app.use(express.json())
+app.use(cors({
+  origin: 'http://localhost:4173'
+}));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
