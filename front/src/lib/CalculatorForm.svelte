@@ -16,7 +16,8 @@
     lastSubmitted = `Calculation: ${operand1} ${operation} ${operand2}`;
   }
 </script>
-
+<section>
+  <h2>Enter Calculation</h2>
 <form on:reset|preventDefault={handleReset} on:submit={handleSubmit}>
   <label>
     Operand 1
@@ -49,3 +50,5 @@
     <strong>Last submitted:</strong> {lastSubmitted}
   </div>
 {/if} 
+
+</section>
