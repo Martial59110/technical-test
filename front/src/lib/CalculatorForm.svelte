@@ -2,15 +2,22 @@
   let operand1: number | '' = '';
   let operand2: number | '' = '';
   let operation: string = 'addition';
+  let lastSubmitted: string = '';
 
   function handleReset() {
     operand1 = '';
     operand2 = '';
     operation = 'addition';
+    lastSubmitted = '';
+  }
+
+  function handleSubmit(event: Event) {
+    event.preventDefault();
+    lastSubmitted = `Calculation: ${operand1} ${operation} ${operand2}`;
   }
 </script>
 
-<form on:reset|preventDefault={handleReset}>
+<form on:reset|preventDefault={handleReset} on:submit={handleSubmit}>
   <label>
     Operand 1
     <input type="number" name="operand1" bind:value={operand1} />
@@ -36,4 +43,9 @@
   Operand 1: {operand1}<br>
   Operand 2: {operand2}<br>
   Operation: {operation}
-</div> 
+</div>
+{#if lastSubmitted}
+  <div style="margin-top:1em; color: #444;">
+    <strong>Last submitted:</strong> {lastSubmitted}
+  </div>
+{/if} 
