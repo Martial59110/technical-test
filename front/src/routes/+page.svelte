@@ -1,5 +1,7 @@
 <script lang="ts">
   import CalculatorForm from '../lib/CalculatorForm.svelte';
+  import CalculationResult from '../lib/CalculationResult.svelte';
+  import CalculationHistory from '../lib/CalculationHistory.svelte';
 </script>
 
 <header>
@@ -7,18 +9,8 @@
 </header>
 
 <main>
-  <section>
-    <h2>Enter Calculation</h2>
-    <CalculatorForm />
-  </section>
-
-  <section>
-    <h2>Calculation Result</h2>
-    
-  </section>
-
-  <section>
-    <h2>History of Calculations</h2>
-    
-  </section>
+ 
+  <CalculatorForm />
+  <CalculationResult />
+  <CalculationHistory />
 </main>
