@@ -1,6 +1,7 @@
 import logger from '../shared/logger';
 import redisClient from '../shared/redis';
 import { Task } from '../shared/types';
+import { performCalculation } from './services/calculator';
 
 export async function startSubscriber() {
   logger.info('Processor subscriber started ');
@@ -29,4 +30,22 @@ async function getPendingTasks(): Promise<Task[]> {
   }
   
   return pendingTasks;
+}
+
+async function processTask(task: Task): Promise<void> {
+  try {
+    const result = performCalculation(task.compute.operation, task.compute.operands);
+    
+    task.result = result;
+    task.status = 'success';
+    
+    await redisClient.set(task.id, JSON.stringify(task));
+    logger.info({ taskId: task.id, result }, 'Task processed successfully');
+  } catch (error) {
+    task.result = error instanceof Error ? error.message : String(error);
+    task.status = 'failed';
+    
+    await redisClient.set(task.id, JSON.stringify(task));
+    logger.error({ taskId: task.id, error }, 'Task processing failed');
+  }
 }
