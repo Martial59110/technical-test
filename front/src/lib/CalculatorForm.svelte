@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { lastTaskId } from './index';
   let operand1: number | '' = '';
   let operand2: number | '' = '';
   let operation: string = 'addition';
@@ -8,8 +9,8 @@
 
   // Mapping des opérations du front vers le backend
   const operationMap: Record<string, string> = {
-    addition: 'add',
-    subtract: 'substract',
+    addition: 'addition',
+    subtract: 'subtract',
     multiply: 'multiply',
     divide: 'divide',
   };
@@ -37,9 +38,10 @@
         })
       });
       const data = await response.json();
-      if (data.status === 'ok') {
+      if (data.status === 'ok' && data.id) {
+        lastTaskId.set(data.id);
         message = 'Calculation sent!';
-         handleReset();
+        handleReset();
       } else {
         message = 'Error: ' + (data.error || 'Unknown error');
       }
