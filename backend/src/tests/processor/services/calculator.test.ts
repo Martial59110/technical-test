@@ -16,7 +16,12 @@ describe('Calculator Service', () => {
       const result = performCalculation('addition', [5, 3]);
       expect(result).toBe(8);
     });
-
+    it('should perform subtraction correctly', () => {
+        const result = performCalculation('subtract', [10, 4]);
+        expect(result).toBe(6);
+      });
+  
+  
  
   });
 }); 
