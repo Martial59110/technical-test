@@ -1,0 +1,21 @@
+<form>
+  <label>
+    Operand 1
+    <input type="number" name="operand1" />
+  </label>
+  <label>
+    Operand 2
+    <input type="number" name="operand2" />
+  </label>
+  <label>
+    Operator
+    <select name="operation">
+      <option value="addition">Addition (+)</option>
+      <option value="subtract">Subtraction (-)</option>
+      <option value="multiply">Multiplication (×)</option>
+      <option value="divide">Division (÷)</option>
+    </select>
+  </label>
+  <button type="reset">Reset</button>
+  <button type="submit">Calculate</button>
+</form> 
