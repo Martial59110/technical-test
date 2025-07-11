@@ -21,7 +21,7 @@
 			if (!res.ok) throw new Error('Failed to fetch tasks');
 			const data = await res.json();
 			tasks = data.tasks || [];
-		} catch (e) {
+		} catch {
 			error = 'Could not load history';
 		} finally {
 			isLoading = false;
@@ -59,7 +59,7 @@
 				<div class="text-gray-500">No calculations yet.</div>
 			{:else}
 				<ul class="space-y-4">
-					{#each tasks as task, i}
+					{#each tasks as task, i (task.id)}
 						<li class="flex items-center justify-between rounded-xl bg-gray-50 p-4 shadow-sm">
 							<div class="flex items-center gap-4">
 								<div class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">

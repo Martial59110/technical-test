@@ -45,7 +45,7 @@
 			} else {
 				message = 'Error: ' + (data.error || 'Unknown error');
 			}
-		} catch (err) {
+		} catch {
 			message = 'Network error';
 		} finally {
 			isLoading = false;

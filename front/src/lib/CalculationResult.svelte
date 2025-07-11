@@ -2,11 +2,20 @@
 	import { onDestroy } from 'svelte';
 	import { lastTaskId } from './index';
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
+
+	type Task = {
+		id: string;
+		compute: {
+			operation: string;
+			operands: number[];
+		};
+		result: number | string;
+		status: 'success' | 'failed' | 'pending';
+	};
 
 	let result: number | string = '';
 	let status: string = '';
-	let polling: any;
+	let polling: ReturnType<typeof setInterval> | undefined;
 	let loading = false;
 	let unsub: () => void;
 	let currentTaskId: string | null = null;
@@ -17,7 +26,7 @@
 			const res = await fetch('http://localhost:3000/tasks');
 			const data = await res.json();
 			if (data.status === 'ok' && Array.isArray(data.tasks)) {
-				const task = data.tasks.find((t: any) => t.id === taskId);
+				const task = (data.tasks as Task[]).find((t) => t.id === taskId);
 				if (task) {
 					result = task.result;
 					status = task.status;
@@ -26,7 +35,7 @@
 					status = '';
 				}
 			}
-		} catch (e) {
+		} catch {
 			result = 'Error';
 			status = 'failed';
 		} finally {
