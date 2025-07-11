@@ -28,6 +28,12 @@ describe('Calculator Service', () => {
         const result = performCalculation('divide', [15, 3]);
         expect(result).toBe(5);
       });
+    it('should throw error for division by zero', () => {
+        expect(() => performCalculation('divide', [10, 0])).toThrow('Division by zero is not allowed');
+      });
   
+    it('should throw error for unsupported operation', () => {
+        expect(() => performCalculation('invalid', [1, 2])).toThrow('Unsupported operation: invalid');
+      });
   });
 }); 
