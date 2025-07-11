@@ -24,8 +24,10 @@ describe('Calculator Service', () => {
         const result = performCalculation('multiply', [6, 7]);
         expect(result).toBe(42);
       });
-
+    it('should perform division correctly', () => {
+        const result = performCalculation('divide', [15, 3]);
+        expect(result).toBe(5);
+      });
   
- 
   });
 }); 
