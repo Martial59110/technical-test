@@ -10,6 +10,12 @@ export async function startSubscriber() {
       await redisClient.connect();
     }
     
+    // Récupérer et traiter les tâches en attente au démarrage
+    const pendingTasks = await getPendingTasks();
+    for (const task of pendingTasks) {
+      await processTask(task);
+    }
+    
     const subscriber = redisClient.duplicate();
     await subscriber.connect();
     
