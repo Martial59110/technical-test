@@ -9,6 +9,20 @@ export async function startSubscriber() {
     if (!redisClient.isOpen) {
       await redisClient.connect();
     }
+    
+    const subscriber = redisClient.duplicate();
+    await subscriber.connect();
+    
+    await subscriber.subscribe('task', async (message) => {
+      try {
+        const task: Task = JSON.parse(message);
+        await processTask(task);
+      } catch (error) {
+        logger.error({ error, message }, 'Failed to process task from channel');
+      }
+    });
+    
+    logger.info('Subscribed to task channel');
   } catch (err) {
     logger.error({ err }, 'Failed to connect to Redis in processor');
     throw err;
