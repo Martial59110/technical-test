@@ -10,4 +10,13 @@ describe('Calculator Service', () => {
       expect(operations).toHaveProperty('divide');
     });
   });
+
+  describe('performCalculation', () => {
+    it('should perform addition correctly', () => {
+      const result = performCalculation('addition', [5, 3]);
+      expect(result).toBe(8);
+    });
+
+ 
+  });
 }); 
