@@ -4,10 +4,16 @@ import logger from '../../shared/logger';
 
 export async function enqueueTask(task: Task): Promise<void> {
     try {
+        // Stocker la tâche dans Redis pour la persistance
         await redisClient.set(task.id, JSON.stringify(task));
+        
+        // Publier sur le channel pour notifier le processeur
+        await redisClient.publish('task', JSON.stringify(task));
+        
+        logger.info({ taskId: task.id }, 'Task stored and published');
     } catch (error) {
         logger.error({ 
-            message: 'Failed to store task in Redis',
+            message: 'Failed to store and publish task',
             taskId: task.id,
             error: error instanceof Error ? error.message : String(error)
         });
