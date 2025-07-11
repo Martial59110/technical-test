@@ -29,7 +29,17 @@ services:
       - "3000:3000"
     depends_on:
       - database
-
+  processor:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-proc
+    environment:
+      - REDIS_URL=redis://database:6379
+      - PROCESSOR_PORT=3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
 volumes:
   redis-data:
   redis-insight:
