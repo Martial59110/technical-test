@@ -20,7 +20,11 @@ describe('Calculator Service', () => {
         const result = performCalculation('subtract', [10, 4]);
         expect(result).toBe(6);
       });
-  
+    it('should perform multiplication correctly', () => {
+        const result = performCalculation('multiply', [6, 7]);
+        expect(result).toBe(42);
+      });
+
   
  
   });
