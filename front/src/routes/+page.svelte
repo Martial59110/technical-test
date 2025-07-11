@@ -1,2 +1,20 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<header>
+  <h1>Calculator App</h1>
+</header>
+
+<main>
+  <section>
+    <h2>Enter Calculation</h2>
+  
+  </section>
+
+  <section>
+    <h2>Calculation Result</h2>
+   
+  </section>
+
+  <section>
+    <h2>History of Calculations</h2>
+  
+  </section>
+</main>
