@@ -2,6 +2,15 @@ import redisClient from '../../shared/redis';
 import { Task } from '../../shared/types';
 import logger from '../../shared/logger';
 
+/**
+ * Fonctions utilitaires pour gérer la file d'attente des tâches dans Redis.
+ * - enqueueTask : ajoute une tâche dans Redis et la publie sur le canal 'task' pour le processeur.
+ * - getAllTasks : récupère toutes les tâches stockées dans Redis (pour l'historique).
+ * 
+ * Ces fonctions sont utilisées par les routes du collecteur pour stocker et récupérer les calculs à traiter.
+ * Toute la logique d'accès à Redis est centralisée ici.
+ */
+
 export async function enqueueTask(task: Task): Promise<void> {
     try {
         await redisClient.set(task.id, JSON.stringify(task));
