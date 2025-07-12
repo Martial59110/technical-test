@@ -1,38 +1,15 @@
-# sv
+# Test technique Frontend - Calculatrice avec SvelteKit
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Objectif
+L'objectif de ce test est de créer une calculatrice simple en utilisant **SvelteKit**. La calculatrice doit prendre deux opérandes et un opérateur, puis afficher les résultats en se servant des serveurs créés dans le backend et des résultats stockés dans Redis.
 
-## Creating a project
+## Fonctionnalités attendues
+- Interface utilisateur permettant à l'utilisateur de saisir deux opérandes et de sélectionner un opérateur.
+- Intégration avec les serveurs backend créés pour le traitement des calculs et le stockage des résultats dans Redis.
+- Affichage du résultat calculé dans l'interface utilisateur.
+- Possibilité de lister toutes les tâches créées et leurs résultats.
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Bonus
+- Utilisation de Docker pour lancer le projet. (N'oubliez pas de mettre à jour le README-RUN.md)
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
