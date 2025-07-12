@@ -3,6 +3,15 @@ import redisClient from '../shared/redis';
 import { Task } from '../shared/types';
 import { performCalculation } from './services/calculator';
 
+/**
+ * Ce fichier gère la logique du processeur qui écoute les tâches à traiter via Redis.
+ * - Se connecte à Redis et s'abonne au canal 'task' pour recevoir les nouveaux calculs à traiter.
+ * - Au démarrage, traite aussi toutes les tâches en attente (status 'pending').
+ * - Pour chaque tâche reçue, effectue le calcul et met à jour le résultat et le statut dans Redis.
+ * 
+ * Toute la logique de traitement asynchrone et de gestion des erreurs est centralisée ici.
+ */
+
 export async function startSubscriber() {
   logger.info('Processor subscriber started ');
   try {
