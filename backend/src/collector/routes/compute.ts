@@ -3,6 +3,7 @@ import { validateCompute } from '../../utils/validation'
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../../shared/types';
 import { enqueueTask, getAllTasks } from '../services/queue';
+import redisClient from '../../shared/redis';
 import logger from '../../shared/logger';
 
 export const compute = async (req: Request, res: Response): Promise<void> => {
@@ -21,12 +22,13 @@ export const compute = async (req: Request, res: Response): Promise<void> => {
         id,
         compute: req.body,
         result: "",
-        status: "pending"
+        status: "pending",
+        createdAt: new Date().toISOString()
     };
 
     try {
         await enqueueTask(task); 
-        res.json({status: "ok"});
+        res.json({status: "ok", id});
     } catch (error) {
         logger.error({ 
             message: 'Failed to enqueue task',
@@ -49,3 +51,12 @@ export const getTasks = async (req: Request, res: Response): Promise<void> => {
         res.status(500).json({ status: "error", message: "Internal server error" });
     }
 }
+
+export const clearTasks = async (req: Request, res: Response): Promise<void> => {
+    try {
+        await redisClient.flushAll();
+        res.json({ status: "ok" });
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Failed to clear tasks" });
+    }
+};
