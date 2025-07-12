@@ -10,5 +10,5 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 COPY --from=build /app .
-EXPOSE 5173
+EXPOSE 4173
 CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"] 
