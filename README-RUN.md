@@ -60,7 +60,26 @@ docker compose down
 
 ---
 
-### 6. **Sans Docker (pour le développement)**
+### 6. **Configuration des variables d'environnement**
+
+**Avec Docker** : Les variables sont automatiquement configurées dans `docker-compose.yaml`.
+
+**Sans Docker (développement local)** : Créez un fichier `.env` dans le dossier `backend/` :
+
+```env
+# Port du serveur collector
+COLLECTOR_PORT=3000
+
+# URL de connexion Redis
+REDIS_URL=redis://localhost:6379
+
+# Niveau de log (debug, info, warn, error)
+LOG_LEVEL=info
+```
+
+---
+
+### 7. **Sans Docker (pour le développement)**
 
 Vous pouvez aussi lancer chaque partie localement (nécessite Node.js 20+) :
 
