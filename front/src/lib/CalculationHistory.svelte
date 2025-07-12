@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { tasks, isLoadingTasks, errorTasks, fetchTasks } from './historyStore';
-	import type { Task } from './historyStore';
-
-	let polling: ReturnType<typeof setInterval> | undefined;
+	
 
 	$: sortedTasks = $tasks.slice().sort((a, b) => {
 		if (!a.createdAt || !b.createdAt) return 0;
