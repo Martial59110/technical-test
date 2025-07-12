@@ -3,7 +3,6 @@
 export interface Compute {
   operation: string;
   operands: number[];
-  createdAt?: string;
 }
 
 // Une tâche dans la file d'attente avec son statut et résultat
@@ -12,6 +11,7 @@ export interface Task {
   compute: Compute;
   result: number | string;
   status: "success" | "failed" | "pending";
+  createdAt: string;
 }
 
 // Collection des fonctions de calcul (addition, subtract, etc.)
