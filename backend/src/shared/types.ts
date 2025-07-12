@@ -3,6 +3,7 @@
 export interface Compute {
   operation: string;
   operands: number[];
+  createdAt?: string;
 }
 
 // Une tâche dans la file d'attente avec son statut et résultat
