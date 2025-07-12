@@ -3,6 +3,7 @@
 	import { lastTaskId } from './index';
 	import { onMount } from 'svelte';
 
+	/* Type pour une tâche de calcul, pour bien typer la récupération */
 	type Task = {
 		id: string;
 		compute: {
@@ -13,6 +14,7 @@
 		status: 'success' | 'failed' | 'pending';
 	};
 
+	/* Valeur du résultat affiché et statut de la tâche */
 	let result: number | string = '';
 	let status: string = '';
 	let polling: ReturnType<typeof setInterval> | undefined;
@@ -20,6 +22,7 @@
 	let unsub: () => void;
 	let currentTaskId: string | null = null;
 
+	/* Va chercher le résultat de la tâche côté backend, et met à jour l'affichage */
 	async function fetchResult(taskId: string) {
 		loading = true;
 		try {
@@ -46,15 +49,18 @@
 		}
 	}
 
+	/* Lance le polling pour aller chercher le résultat toutes les 1,5s */
 	function startPolling(taskId: string) {
 		fetchResult(taskId);
 		polling = setInterval(() => fetchResult(taskId), 1500);
 	}
 
+	/* Arrête le polling si la tâche est terminée ou si on change de calcul */
 	function stopPolling() {
 		if (polling) clearInterval(polling);
 	}
 
+	/* À chaque fois qu'on soumet un nouveau calcul, on écoute l'id de la tâche et on lance le polling */
 	onMount(() => {
 		unsub = lastTaskId.subscribe((id) => {
 			stopPolling();
