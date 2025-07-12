@@ -1,14 +1,13 @@
 import dotenv from 'dotenv'
 import cors from 'cors';
-
-
-
-dotenv.config()
-
 import express from 'express'
 import { Request, Response } from 'express'
 import logger from '../shared/logger'
 import { compute, getTasks } from './routes/compute'
+import { clearTasks } from './routes/compute'
+import redisClient from '../shared/redis';
+
+dotenv.config()
 
 const app = express()
 const port = process.env.COLLECTOR_PORT
@@ -18,14 +17,14 @@ app.use(cors({
   origin: 'http://localhost:4173'
 }));
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
-})
-
-
 app.post('/compute', compute)
 app.get('/tasks', getTasks)
+app.delete('/tasks', clearTasks)
 
-app.listen(port, () => {
-  logger.info(`Collector server running on port ${port}`)
-})
+;(async () => {
+  await redisClient.connect();
+  app.listen(port, () => {
+    logger.info(`Collector server running on port ${port}`)
+  })
+})();
+
