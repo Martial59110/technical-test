@@ -6,6 +6,16 @@ import { enqueueTask, getAllTasks } from '../services/queue';
 import redisClient from '../../shared/redis';
 import logger from '../../shared/logger';
 
+/**
+ * Ce fichier gère toutes les routes liées aux calculs pour le collecteur.
+ * - POST /compute : reçoit une requête de calcul, valide les données, crée une tâche et la stocke dans Redis.
+ * - GET /tasks : retourne toutes les tâches stockées (historique des calculs).
+ * - DELETE /tasks : supprime toutes les tâches (reset de l'historique).
+ * 
+ * Chaque tâche est identifiée par un id unique (UUID) et contient l'opération, les opérandes, le résultat, le statut et la date de création.
+ * Les interactions avec Redis (stockage, récupération, suppression) sont déléguées à des fonctions utilitaires.
+ */
+
 export const compute = async (req: Request, res: Response): Promise<void> => {
     if (!validateCompute(req.body)) {
         logger.warn({ 
