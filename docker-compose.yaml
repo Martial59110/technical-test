@@ -45,7 +45,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "4173:4173"
     depends_on:
       - collector
 volumes:

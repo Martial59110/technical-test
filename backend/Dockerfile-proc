@@ -15,4 +15,4 @@ RUN npm run build
 WORKDIR /app/dist/processor
 
 
-CMD ["node", "server.js"]
+CMD ["node", "index.js"]
