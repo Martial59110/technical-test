@@ -5,6 +5,10 @@ import logger from '../../shared/logger';
 export async function enqueueTask(task: Task): Promise<void> {
     try {
         await redisClient.set(task.id, JSON.stringify(task));
+ 
+        await redisClient.publish('task', JSON.stringify(task));
+        
+        logger.info({ taskId: task.id }, 'Task stored and published');
     } catch (error) {
         logger.error({ 
             message: 'Failed to store task in Redis',
