@@ -30,6 +30,9 @@
 				if (task) {
 					result = task.result;
 					status = task.status;
+					if (status === 'success' || status === 'failed') {
+						stopPolling();
+					}
 				} else {
 					result = '';
 					status = '';
