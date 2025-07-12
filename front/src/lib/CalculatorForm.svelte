@@ -42,7 +42,7 @@
 			if (data.status === 'ok' && data.id) {
 				lastTaskId.set(data.id);
 				message = 'Calculation sent!';
-				handleReset();
+			
 				setTimeout(() => {
 					fetchTasks();
 				}, 100);
