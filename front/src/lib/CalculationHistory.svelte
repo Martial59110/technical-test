@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { tasks, isLoadingTasks, errorTasks, fetchTasks } from './historyStore';
-	
 
 	$: sortedTasks = $tasks.slice().sort((a, b) => {
 		if (!a.createdAt || !b.createdAt) return 0;
