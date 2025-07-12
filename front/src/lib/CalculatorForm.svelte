@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { lastTaskId } from './index';
+	import { fetchTasks } from './historyStore';
 	let operand1: number | '' = '';
 	let operand2: number | '' = '';
 	let operation: string = 'addition';
@@ -42,6 +43,9 @@
 				lastTaskId.set(data.id);
 				message = 'Calculation sent!';
 				handleReset();
+				setTimeout(() => {
+					fetchTasks();
+				}, 100);
 			} else {
 				message = 'Error: ' + (data.error || 'Unknown error');
 			}
