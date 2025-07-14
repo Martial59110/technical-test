@@ -16,7 +16,7 @@ import redisClient from '../shared/redis';
  * Ce fichier lance le serveur HTTP qui reçoit les requêtes du front et interagit avec Redis pour la gestion des calculs.
  */
 
-dotenv.config()
+dotenv.config({ path: '../../.env' })
 
 const app = express()
 const port = process.env.COLLECTOR_PORT
@@ -36,4 +36,3 @@ app.delete('/tasks', clearTasks)
     logger.info(`Collector server running on port ${port}`)
   })
 })();
-
