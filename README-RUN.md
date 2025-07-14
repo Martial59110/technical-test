@@ -12,7 +12,27 @@ Ce projet est entièrement dockerisé. Vous pouvez lancer le backend (collecteur
 
 ---
 
-### 2. **Démarrer tous les services**
+### 2. **Configuration des variables d'environnement**
+
+**Étape obligatoire** : Créez un fichier `.env` à la racine du projet en copiant le fichier `.env.example` :
+
+```bash
+cp .env.example .env
+```
+
+Puis modifiez le fichier `.env` avec vos valeurs :
+
+```env
+COLLECTOR_PORT=3000
+PROCESSOR_PORT=3001
+FRONT_PORT=4173
+LOG_LEVEL=info
+REDIS_URL=redis://database:6379
+```
+
+---
+
+### 3. **Démarrer tous les services**
 
 Depuis la racine du projet, lancez :
 
@@ -29,18 +49,23 @@ docker compose up --build
 
 ---
 
-### 3. **Accéder à l'application**
+### 4. **Accéder à l'application**
 
 - **Frontend (UI de la calculatrice)** :  
   [http://localhost:4173](http://localhost:4173)
 
+- **API Collector** :  
+  [http://localhost:3000](http://localhost:3000)
+
+- **API Processor** :  
+  [http://localhost:3001](http://localhost:3001)
 
 - **RedisInsight (UI pour Redis)** :  
   [http://localhost:5540](http://localhost:5540)
 
 ---
 
-### 4. **Arrêter tous les services**
+### 5. **Arrêter tous les services**
 
 Pour arrêter et supprimer tous les conteneurs :
 
@@ -50,32 +75,13 @@ docker compose down
 
 ---
 
-### 5. **Dépannage**
+### 6. **Dépannage**
 
 - Si vous modifiez le code, relancez avec `--build` pour reconstruire les images.
-- Pour réinitialiser les données Redis, ajoutez l’option `-v` :
+- Pour réinitialiser les données Redis, ajoutez l'option `-v` :
   ```bash
   docker compose down -v
   ```
-
----
-
-### 6. **Configuration des variables d'environnement**
-
-**Avec Docker** : Les variables sont automatiquement configurées dans `docker-compose.yaml`.
-
-**Sans Docker (développement local)** : Créez un fichier `.env` dans le dossier `backend/` :
-
-```env
-# Port du serveur collector
-COLLECTOR_PORT=3000
-
-# URL de connexion Redis
-REDIS_URL=redis://localhost:6379
-
-# Niveau de log (debug, info, warn, error)
-LOG_LEVEL=info
-```
 
 ---
 
@@ -83,11 +89,27 @@ LOG_LEVEL=info
 
 Vous pouvez aussi lancer chaque partie localement (nécessite Node.js 20+) :
 
-- **Backend** :
+**Prérequis** :
+- Créez un fichier `.env` à la racine avec les valeurs pour le développement local :
+  ```env
+  COLLECTOR_PORT=3000
+  PROCESSOR_PORT=3001
+  FRONT_PORT=4173
+  LOG_LEVEL=info
+  REDIS_URL=redis://localhost:6379
+  ```
+
+**Lancement** :
+- **Backend (Collector)** :
   ```bash
   cd backend
   npm install
   npm run dev
+  ```
+- **Backend (Processor)** :
+  ```bash
+  cd backend
+  npm run dev:processor
   ```
 - **Frontend** :
   ```bash
@@ -96,7 +118,10 @@ Vous pouvez aussi lancer chaque partie localement (nécessite Node.js 20+) :
   npm run dev
   ```
 - **Redis** :
-  Installez et lancez Redis localement, ou utilisez Docker uniquement pour Redis.
+  Installez et lancez Redis localement, ou utilisez Docker uniquement pour Redis :
+  ```bash
+  docker run -d -p 6379:6379 redis:latest
+  ```
 
 ---
 
