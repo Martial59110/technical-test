@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { tasks, isLoadingTasks, errorTasks, fetchTasks } from './historyStore';
-	
 
+	/* On trie les tâches par date de création (le plus récent en haut). Si pas de date, on laisse l'ordre d'origine. */
 	$: sortedTasks = $tasks.slice().sort((a, b) => {
 		if (!a.createdAt || !b.createdAt) return 0;
 		return b.createdAt.localeCompare(a.createdAt);
 	});
 
+	/* Permet de tout supprimer d'un coup (reset l'historique) */
 	async function clearHistory() {
 		isLoadingTasks.set(true);
 		errorTasks.set('');
@@ -22,10 +23,12 @@
 		}
 	}
 
+	/* On charge l'historique au montage du composant */
 	onMount(() => {
 		fetchTasks();
 	});
 
+	/* Juste pour afficher le bon symbole selon l'opération */
 	function getOperationString(op: string) {
 		switch (op) {
 			case 'addition':

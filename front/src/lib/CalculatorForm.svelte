@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { lastTaskId } from './index';
 	import { fetchTasks } from './historyStore';
+
+	/* Champs contrôlés du formulaire (valeurs des inputs) */
 	let operand1: number | '' = '';
 	let operand2: number | '' = '';
 	let operation: string = 'addition';
@@ -8,7 +10,7 @@
 	let isLoading = false;
 	let message = '';
 
-	// Mapping des opérations du front vers le backend
+	/* Petite table de correspondance pour envoyer le bon nom d'opération au backend */
 	const operationMap: Record<string, string> = {
 		addition: 'addition',
 		subtract: 'subtract',
@@ -16,6 +18,7 @@
 		divide: 'divide'
 	};
 
+	/* Remet tout à zéro quand on clique sur reset */
 	function handleReset() {
 		operand1 = '';
 		operand2 = '';
@@ -24,6 +27,7 @@
 		message = '';
 	}
 
+	/* Quand on soumet le formulaire, on envoie la requête au backend et on gère la réponse */
 	async function handleSubmit(event: Event) {
 		event.preventDefault();
 		lastSubmitted = `Calculation: ${operand1} ${operation} ${operand2}`;
@@ -42,7 +46,7 @@
 			if (data.status === 'ok' && data.id) {
 				lastTaskId.set(data.id);
 				message = 'Calculation sent!';
-				handleReset();
+
 				setTimeout(() => {
 					fetchTasks();
 				}, 100);

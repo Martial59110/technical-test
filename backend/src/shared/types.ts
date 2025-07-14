@@ -1,22 +1,31 @@
 
-// Représente une opération mathématique à effectuer
+/**
+ * Définit tous les types TypeScript partagés entre les différents modules du backend.
+ * - Compute : structure d'une opération mathématique à effectuer.
+ * - Task : structure d'une tâche dans la file d'attente (avec statut, résultat, date, etc.).
+ * - Operands : dictionnaire des fonctions de calcul disponibles.
+ * - OperationType : liste des opérations supportées.
+ * 
+ * Permet d'assurer la cohérence des données et de faciliter l'autocomplétion/validation dans tout le projet.
+ */
+
+
 export interface Compute {
   operation: string;
   operands: number[];
 }
 
-// Une tâche dans la file d'attente avec son statut et résultat
+
 export interface Task {
   id: string;
   compute: Compute;
   result: number | string;
   status: "success" | "failed" | "pending";
+  createdAt: string;
 }
 
-// Collection des fonctions de calcul (addition, subtract, etc.)
 export interface Operands {
   [key: string]: (operand1: number, operand2: number) => number;
 }
 
-// Les 4 calculs qu'on peut faire
 export type OperationType = "addition" | "subtract" | "multiply" | "divide"; 

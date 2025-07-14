@@ -20,7 +20,8 @@ describe('enqueueTask', () => {
       id: 'test-id',
       compute: { operation: 'add', operands: [1, 2] },
       result: '',
-      status: 'pending'
+      status: 'pending',
+      createdAt: new Date().toISOString()
     };
     await enqueueTask(task);
     const stored = await redisClient.get(task.id);
