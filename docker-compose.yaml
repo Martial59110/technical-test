@@ -23,10 +23,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile-collector
     environment:
-      - REDIS_URL=redis://database:6379
-      - COLLECTOR_PORT=3000
+      - REDIS_URL=${REDIS_URL}
+      - COLLECTOR_PORT=${COLLECTOR_PORT}
     ports:
-      - "3000:3000"
+      - "${COLLECTOR_PORT}:${COLLECTOR_PORT}"
     depends_on:
       - database
   processor:
@@ -34,10 +34,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile-proc
     environment:
-      - REDIS_URL=redis://database:6379
-      - PROCESSOR_PORT=3001
+      - REDIS_URL=${REDIS_URL}
+      - PROCESSOR_PORT=${PROCESSOR_PORT}
     ports:
-      - "3001:3001"
+      - "${PROCESSOR_PORT}:${PROCESSOR_PORT}"
     depends_on:
       - database
   front:
@@ -45,7 +45,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - "4173:4173"
+      - "${FRONT_PORT}:${FRONT_PORT}"
     depends_on:
       - collector
 volumes:
