@@ -7,7 +7,16 @@ import { compute, getTasks } from './routes/compute'
 import { clearTasks } from './routes/compute'
 import redisClient from '../shared/redis';
 
-dotenv.config()
+/**
+ * Point d'entrée du serveur collecteur (Express).
+ * - Initialise Express, configure CORS pour n'accepter que le front.
+ * - Connecte le client Redis avant de démarrer le serveur.
+ * - Expose les routes principales : /compute, /tasks (GET et DELETE).
+ * 
+ * Ce fichier lance le serveur HTTP qui reçoit les requêtes du front et interagit avec Redis pour la gestion des calculs.
+ */
+
+dotenv.config({ path: '../../.env' })
 
 const app = express()
 const port = process.env.COLLECTOR_PORT
@@ -27,4 +36,3 @@ app.delete('/tasks', clearTasks)
     logger.info(`Collector server running on port ${port}`)
   })
 })();
-
