@@ -2,6 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { lastTaskId } from './index';
 	import { onMount } from 'svelte';
+	import { API_ENDPOINTS } from './config';
 
 	/* Type pour une tâche de calcul, pour bien typer la récupération */
 	type Task = {
@@ -26,7 +27,7 @@
 	async function fetchResult(taskId: string) {
 		loading = true;
 		try {
-			const res = await fetch('http://localhost:3000/tasks');
+			const res = await fetch(API_ENDPOINTS.TASKS);
 			const data = await res.json();
 			if (data.status === 'ok' && Array.isArray(data.tasks)) {
 				const task = (data.tasks as Task[]).find((t) => t.id === taskId);
