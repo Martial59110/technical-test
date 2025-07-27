@@ -25,6 +25,7 @@ services:
     environment:
       - REDIS_URL=${REDIS_URL}
       - COLLECTOR_PORT=${COLLECTOR_PORT}
+      - FRONT_PORT=${FRONT_PORT}
     ports:
       - "${COLLECTOR_PORT}:${COLLECTOR_PORT}"
     depends_on:
