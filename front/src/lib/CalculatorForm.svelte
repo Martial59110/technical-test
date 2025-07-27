@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { lastTaskId } from './index';
 	import { fetchTasks } from './historyStore';
+	import { API_ENDPOINTS } from './config';
 
 	/* Champs contrôlés du formulaire (valeurs des inputs) */
 	let operand1: number | '' = '';
@@ -34,7 +35,7 @@
 		message = '';
 		isLoading = true;
 		try {
-			const response = await fetch('http://localhost:3000/compute', {
+			const response = await fetch(API_ENDPOINTS.COMPUTE, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
