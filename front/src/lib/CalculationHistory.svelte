@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { tasks, isLoadingTasks, errorTasks, fetchTasks } from './historyStore';
+	import { API_ENDPOINTS } from './config';
 
 	/* On trie les tâches par date de création (le plus récent en haut). Si pas de date, on laisse l'ordre d'origine. */
 	$: sortedTasks = $tasks.slice().sort((a, b) => {
@@ -13,7 +14,7 @@
 		isLoadingTasks.set(true);
 		errorTasks.set('');
 		try {
-			const res = await fetch('http://localhost:3000/tasks', { method: 'DELETE' });
+			const res = await fetch(API_ENDPOINTS.TASKS, { method: 'DELETE' });
 			if (!res.ok) throw new Error('Failed to clear history');
 			await fetchTasks();
 		} catch {
