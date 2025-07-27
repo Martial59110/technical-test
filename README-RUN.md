@@ -24,6 +24,7 @@ Puis modifiez le fichier `.env` avec vos valeurs :
 
 ```env
 COLLECTOR_PORT=3000
+PUBLIC_COLLECTOR_PORT=3000  # Doit être identique à COLLECTOR_PORT
 PROCESSOR_PORT=3001
 FRONT_PORT=4173
 LOG_LEVEL=info
@@ -93,6 +94,7 @@ Vous pouvez aussi lancer chaque partie localement (nécessite Node.js 20+) :
 - Créez un fichier `.env` à la racine avec les valeurs pour le développement local :
   ```env
   COLLECTOR_PORT=3000
+  PUBLIC_COLLECTOR_PORT=3000  # Doit être identique à COLLECTOR_PORT
   PROCESSOR_PORT=3001
   FRONT_PORT=4173
   LOG_LEVEL=info
