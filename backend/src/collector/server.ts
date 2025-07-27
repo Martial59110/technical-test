@@ -23,7 +23,7 @@ const port = process.env.COLLECTOR_PORT
 
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:4173'
+  origin: `http://localhost:${process.env.FRONT_PORT}`
 }));
 
 app.post('/compute', compute)
