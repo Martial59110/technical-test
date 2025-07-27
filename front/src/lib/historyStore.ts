@@ -9,6 +9,7 @@
 */
 
 import { writable } from 'svelte/store';
+import { API_ENDPOINTS } from './config';
 
 export type Task = {
 	id: string;
@@ -29,7 +30,7 @@ export async function fetchTasks() {
 	isLoadingTasks.set(true);
 	errorTasks.set('');
 	try {
-		const res = await fetch('http://localhost:3000/tasks');
+		const res = await fetch(API_ENDPOINTS.TASKS);
 		if (!res.ok) throw new Error('Failed to fetch tasks');
 		const data = await res.json();
 		tasks.set(data.tasks || []);
